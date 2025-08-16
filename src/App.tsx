@@ -6,6 +6,7 @@ interface LessonItem {
   q: string;
   options?: string[];
   ans: string;
+  exp?: string;
 }
 
 interface LessonSection {
@@ -28,7 +29,7 @@ const lesson1Content: LessonContent = {
         { q: '1. The height of a tree can be measured by', options: ['metre scale', 'metre rod', 'plastic ruler', 'measuring tape'], ans: 'measuring tape' },
         { q: '2. Conversion of 7 m into cm gives', options: ['70 cm', '7 cm', '700 cm', '7000 cm'], ans: '700 cm' },
         { q: '3. Quantity that can be measured is called', options: ['physical quantity', 'measurement', 'unit', 'motion'], ans: 'Measurement' },
-        { q: '4. Choose the correct one', options: ['a) km>mm>cm>m', 'b) km>mm>m>cm', 'c) km>m>cm>mm', 'd) km>cm>m>mm'], ans: 'km>m>cm>mm' },
+        { q: '4. Choose the correct one', options: ['km>mm>cm>m', 'km>mm>m>cm', 'km>m>cm>mm', 'km>cm>m>mm'], ans: 'km>m>cm>mm' },
         { q: '5. While measuring the length of an object using a ruler, the position of your eye should be', options: ['left side of the point.', 'vertically above the point where the measurement is to be taken.', 'right side of the point', 'anywhere according to one\'s convenience.'], ans: 'vertically above the point where the measurement is to be taken.' }
       ]
     },
@@ -55,9 +56,9 @@ const lesson1Content: LessonContent = {
     {
       heading: 'IV. Complete the analogy.',
       items: [
-        { q: '1. Sugar: Beam balance :: Lime juice :', ans: 'Graduated cylinder' },
-        { q: '2. Height of a person: cm :: Length of your sharpened pencil lead :', ans: 'mm' },
-        { q: '3. Milk: Volume :: Vegetables :', ans: 'Mass' }
+        { q: '1. Sugar: Beam balance :: Lime juice :', ans: 'Graduated cylinder', exp: 'A beam balance is used to measure the mass of a solid like sugar. Similarly, a graduated cylinder is used to measure the volume of a liquid like lime juice.' },
+        { q: '2. Height of a person: cm :: Length of your sharpened pencil lead :', ans: 'mm', exp: 'Centimetres (cm) are a suitable unit for measuring the height of a person. In the same way, millimetres (mm) are a more appropriate and precise unit for measuring something small, like the length of a sharpened pencil lead', },
+        { q: '3. Milk: Volume :: Vegetables :', ans: 'Mass', exp: 'Milk is a liquid, and its quantity is measured in terms of volume. Vegetables are solid, and their quantity is measured in terms of mass.' }
       ]
     },
     {
@@ -388,11 +389,13 @@ const LessonContentPage: React.FC<LessonContentPageProps> = ({ goToLessons, sele
                 {item.options && (
                   <div className="mt-2 space-y-1">
                     {item.options.map((option, optIndex) => (
-                      <p key={optIndex} className="text-gray-600">{option}</p>
+                      <p key={optIndex} className="text-gray-600">{`${String.fromCharCode(65 + optIndex).toLowerCase()}) ${option}`}
+                      </p>
                     ))}
                   </div>
                 )}
                 <p className="mt-2 text-green-700 font-bold">Ans: {renderMultiLineText(item.ans)}</p>
+                {item.exp && <p className="mt-2 text-600 font-bold">Explanation: {renderMultiLineText(item.exp)}</p>}
               </li>
             ))}
           </ul>
