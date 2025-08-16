@@ -366,7 +366,7 @@ const LessonsPage: React.FC<LessonsPageProps> = ({ selectedGrade, selectedSubjec
   );
 };
 
-const LessonContentPage: React.FC<LessonContentPageProps> = ({ selectedLesson, goToLessons, selectedGrade, selectedSubject, selectedTerm }) => {
+const LessonContentPage: React.FC<LessonContentPageProps> = ({ goToLessons, selectedGrade, selectedSubject, selectedTerm }) => {
   // Utility function to render multi-line text with <br/> tags
   const renderMultiLineText = (text: string) => text.split('\n').map((line, i) => <span key={i}>{line}<br/></span>);
 
@@ -411,7 +411,7 @@ const App: React.FC = () => {
 
   const goToHome = () => setCurrentPage('home');
   const goToGrades = () => setCurrentPage('grades');
-  const goToSubjects = (grade: number) => {
+  const goToSubjects = (grade: number | null) => {
     setSelectedGrade(grade);
     setCurrentPage('subjects');
   };
@@ -426,7 +426,7 @@ const App: React.FC = () => {
     setSelectedTerm(term);
     setCurrentPage('lessons');
   };
-  const goToLessonContent = (grade: number, subject: string, term: string, lesson: string) => {
+  const goToLessonContent = (grade: number | null, subject: string, term: string, lesson: string) => {
     setSelectedGrade(grade);
     setSelectedSubject(subject);
     setSelectedTerm(term);
